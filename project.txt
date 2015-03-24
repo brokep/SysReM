@@ -29,3 +29,6 @@ Milestones/ExpectedShcedule/TimeLine:
 
 Question:
 	How should the data be displayed? How to go about that etc..
+
+Notes: 
+    sysstat package required for sar
