@@ -15,6 +15,8 @@ Genparser::~Genparser(){
 void* Genparser::threadEntry(void* caller){
     Genparser* tmp = static_cast<Genparser*>(caller);
     tmp->parse();    
+    
+    return NULL;
 }
 
 void Genparser::parse(){
