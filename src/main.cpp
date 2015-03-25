@@ -1,6 +1,10 @@
 #include <iostream>
 #include <unistd.h> //for pipe
 #include <stdio.h> //perror
+#include <pthread.h>
+#include "Statgen.h"
+#include "Stats.h"
+#include "Genparser.h"
 
 int main(int argc, char** argv){
 
@@ -15,25 +19,34 @@ int main(int argc, char** argv){
     pid_t pid = fork();
 
     if(pid>0){
-        //child
-        close(pipefd[0]);
-        dup2(pipefd[1], STDOUT_FILENO);
-        
-        //printf("child stuff blahblahblah");
-        execlp("sar", "sar", "5", "10", NULL);
-        close(pipefd[1]);
+        Statgen sar(pipefd, 1, 10);
+        sar.start();
+
         _exit(0);
     }
     else if(pid == 0){
-        //parent
-        close(pipefd[1]);
-        char buff[10];
-        int tmpCount(0);
-        while(read(pipefd[0], buff, 10) != 0){
-            ++tmpCount;
+        Stats stats;
+        Genparser parser(pipefd, &stats);
 
-            std::cout<<"Read number "<<tmpCount<<": "<<buff<<"\n";
-        }
+        //thread into parser 
+        pthread_t parseThread;
+         
+        if(pthread_create(&parseThread, NULL, 
+            Genparser::threadEntry, &parser) !=0){
+
+            perror("parser thread");
+        }     
+
+        
+        //continuous outpute based on stats
+
+
+
+        //join sometime, havent worked thisa out yet
+        if(pthread_join(parseThread, NULL)!=0){
+            perror("parseThread join"); 
+
+        } 
         
     }
     else{
