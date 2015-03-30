@@ -42,6 +42,6 @@ const std::string currentTime(){
     tm tstruct;
     char b[80];
     tstruct = *localtime(&t);
-    strftime(b, sizeof(b), "%d-%m-%Y %X", &tstruct);
+    strftime(b, sizeof(b), "%m-%d-%Y %X", &tstruct);
     return b;
 }
