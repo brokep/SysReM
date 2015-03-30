@@ -18,10 +18,10 @@ int main(int argc, char** argv){
     count = f?atoi(argv[2]):DEFAULT_COUNT; 
 
     std::list<int> statlist;
-    statlist.push_front(CPU_UTIL);
-    statlist.push_front(MEM_UTIL);
-    statlist.push_front(DISK_STAT);
-    statlist.push_front(PROC_TOP);
+    statlist.push_back(CPU_UTIL);
+    statlist.push_back(MEM_UTIL);
+    statlist.push_back(DISK_STAT);
+    statlist.push_back(PROC_TOP);
     
     std::list<Stat*> stats(StatGen::generate(statlist)); 
 
