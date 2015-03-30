@@ -15,5 +15,5 @@ void CPUStat::measure(){
 
 std::string CPUStat::read(){
 
-    return "";
+    return "CPUReading\n";
 }

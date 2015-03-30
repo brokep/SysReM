@@ -15,5 +15,5 @@ void ProcStat::measure(){
 
 std::string ProcStat::read(){
 
-    return "";
+    return "ProcStat reading\n";
 }

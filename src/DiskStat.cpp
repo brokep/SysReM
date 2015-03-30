@@ -15,5 +15,5 @@ void DiskStat::measure(){
 
 std::string DiskStat::read(){
 
-    return "";
+    return "DiskStat Reading\n";
 }

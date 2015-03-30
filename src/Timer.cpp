@@ -1,4 +1,6 @@
-
+#include <iomanip>
+#include <ctime>
+#include <unistd.h>
 #include "Timer.h"
 #include "Reader.h"
 
@@ -10,8 +12,12 @@ Timer::~Timer(){
 }
 
 void Timer::start(){
-    //call measure on r
-    //call read on r 
-    //wait for intv 
-    //repeat count times
+    unsigned int usecs(m_intv*1000000); 
+    
+    for(int i=0;i<m_count;++i){
+        m_reader.measure();
+        m_reader.read();
+       
+        usleep(usecs); 
+    }
 }

@@ -13,9 +13,9 @@ public:
 
 
 private:
-    Reader &m_reader __attribute__((unused)); 
-    int m_intv __attribute__((unused));
-    int m_count __attribute__((unused)); //suppress warning until implemetatino
+    Reader &m_reader; 
+    int m_intv;
+    int m_count;
 
 };
 

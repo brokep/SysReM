@@ -15,5 +15,5 @@ void MemStat::measure(){
 
 std::string MemStat::read(){
 
-    return "";
+    return "MemStat Reading\n";
 }

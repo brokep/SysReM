@@ -21,10 +21,10 @@ public:
         std::list<Stat*> stats;
         for(auto it = statlist.begin();it!=statlist.end();++it){
             switch(*it){
-                case CPU_UTIL:stats.push_front(new CPUStat());break;
-                case MEM_UTIL:stats.push_front(new MemStat());break;
-                case DISK_STAT:stats.push_front(new DiskStat());break;
-                case PROC_TOP:stats.push_front(new ProcStat());break;
+                case CPU_UTIL:stats.push_back(new CPUStat());break;
+                case MEM_UTIL:stats.push_back(new MemStat());break;
+                case DISK_STAT:stats.push_back(new DiskStat());break;
+                case PROC_TOP:stats.push_back(new ProcStat());break;
 
             }
 
