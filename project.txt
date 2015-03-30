@@ -10,25 +10,42 @@ Description:
 			•Disk
 			•List N most active processes (activity defined by the total CPU utilization). For those processes,
 		–Report CPU utilization
-		–Number of threads
-		–Whether they are CPU bound or IO Bound
+		-Report Memory utilization
+		-Report Disk Statistics
+		-Report Top active processes 
 Error Conditions: 
 	Correctness of resource data can be checked by comparing against another resource monitoring program.
 
 Solution Approach:
-	Initially work with the sar utility to get all resource information available from that. 
-	After having a framework to handle and display this information appropriately, add more utilities to report any more useful resource information.
+	System information will be gathered from the /proc psuedo-filesystem and then report periodically to std::out.
+
+Architectural Details:
+	First of all, there will be an abstract Stat class that specific statistics will subclass to account for differences in how those stats are gathered.
+	(ie CPUStat will subclass stat and MemoryStat will subclass stat, etc) A Reader class will iterate through a list of Stats to capture them all around the same time.
+	The Reader then reports these stats to std:out. The Reader is controllled by a Timer class that decides how often and how many times to report these stats.
+	Interanally a StatGen method and maybe class is used to generate the list of stats. 
+
+	So the flow of main is basically as follows:
+		read command line arguments
+		Generate a list of the stats your interested in
+		Pass that list to the genereator to get a list of those statClasses
+		pass that list to a Reader that gets passed to a timer that also gets passed interval and amount values
+		from there The timer periodically calls on the reader to report until the count is exhausted
+
+	System services used will be mainly reading from /proc is the Stat subclasses
+	other than that, this will be single threaded and pretty straight foward
+
 
 Language used: We will be using C++ for out project.
 
 Milestones/ExpectedShcedule/TimeLine:
-	March 24 – Submit a report about the design. Ideally have framework to collect and store data from sar utility at this point.
-	April 9 – status update and submit a set of slides describing what you have done till now. Have some information being displayed at this point. Basic form of the final program completed.
-	April 12-13 - Add final touches to resource display and add any additional resource stats	 
+	March 24 – Submit a report about the design. 
+	April 9 – status update and submit a set of slides describing what you have done till now. Have framework set and ready to report and handle data.
+			Not neccisarily have all calulations implemented at this point.
+	April 12-13 - Have all utilization and statistics calculations working and displaying. 
 	April 21 – final report and presentation
 
 Question:
 	How should the data be displayed? How to go about that etc..
 
 Notes: 
-    sysstat package required for sar
