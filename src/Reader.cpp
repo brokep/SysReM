@@ -1,6 +1,6 @@
 
-#include <iomanip>
-#include <ctime>
+#include <stdio.h>
+#include <time.h>
 #include <iostream>
 #include "Reader.h"
 #include "Stat.h"
@@ -20,18 +20,28 @@ void Reader::measure(){
         (*it)->measure();    
 }
 
+const std::string currentTime();
+
 void Reader::read(){
     //call read for each in m_stats
     //print out all the stuffs however
 
     //print current time each iteratino through all of the stats
-    auto t = std::time(nullptr);
-    auto tm = *std::localtime(&t);
-    std::cout << std::put_time(&tm, "%d-%m-%Y %H:%M:%S") << std::endl; 
+    std::cout << currentTime() << std::endl;    
 
     std::string st;
     for(auto it = m_stats.begin();it!=m_stats.end();++it){
         st += (*it)->read();
     } 
     std::cout<<st<<std::endl;
+}
+
+
+const std::string currentTime(){
+    time_t t= time(0);
+    tm tstruct;
+    char b[80];
+    tstruct = *localtime(&t);
+    strftime(b, sizeof(b), "%d-%m-%Y %X", &tstruct);
+    return b;
 }
