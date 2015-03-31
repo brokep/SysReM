@@ -2,6 +2,7 @@
 #define CPUSTAT_H
 
 #include "Stat.h"
+#include <string>
 
 class CPUStat : public Stat{
 public:
@@ -12,8 +13,11 @@ public:
    std::string read(); 
 
 private:
-    //relevant fields
-
+    //information about cpu is taken from /proc/cpuinfo
+   std::string m_vendor;
+   std::string m_model_name;
+   double m_freq;
+   int m_procesors;
 };
 
 #endif

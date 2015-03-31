@@ -1,0 +1,3 @@
+/**
+ * Manager of the processes
+ */

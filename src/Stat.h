@@ -3,6 +3,10 @@
 
 #include <string>
 
+/**
+ * Virtual base class for different type of stat measurements.
+ * Derived class will define their own measure() and read() methods
+ */
 class Stat{
 public:
 

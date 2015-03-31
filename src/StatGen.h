@@ -16,8 +16,8 @@
 
 class StatGen{
 public:
+  //generate a list of Stat classes based on statlist
     static  std::list<Stat*> generate(std::list<int> statlist){
-        //generate list of Stat classes based on statlist
         std::list<Stat*> stats;
         for(auto it = statlist.begin();it!=statlist.end();++it){
             switch(*it){
