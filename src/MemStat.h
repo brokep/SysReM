@@ -13,7 +13,13 @@ public:
 
 private:
     //relevant fields
-
+    //found in /proc/meminfo
+    int memTotal;
+    int memFree;
+    int buffers;
+    int cached;
+    int swapFree;
+    int swapTotal;
 };
 
 #endif

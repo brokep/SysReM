@@ -3,8 +3,6 @@
 #include "StatGen.h"
 #include "Reader.h"
 #include "Timer.h"
-#include "JiffyTimer.h"/////////////////
-#include <stdio.h>
 
 #define DEFAULT_INTERVAL 1
 #define DEFAULT_COUNT 10
