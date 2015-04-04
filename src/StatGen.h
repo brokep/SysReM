@@ -2,6 +2,7 @@
 #define STATGEN_H
 
 #include <list>
+#include <string>
 #include "Stat.h"
 #include "CPUStat.h"
 #include "MemStat.h"
@@ -33,6 +34,31 @@ public:
         } 
 
         return stats;
+    }
+
+    static  std::list<int> genlist(int count, char** args){
+        std::list<int> statlist;
+        for(int i = 0;i<count;++i){
+            switch(args[i][1]){
+                case 'c':statlist.push_back(CPU_UTIL);break;
+                case 'm':statlist.push_back(MEM_UTIL);break;
+                case 'd':statlist.push_back(DISK_STAT);break;
+                case 'p':statlist.push_back(PROC_TOP);break;
+                case 'a':
+                    statlist.push_back(CPU_UTIL);
+                    statlist.push_back(MEM_UTIL);
+                    statlist.push_back(DISK_STAT);
+                    statlist.push_back(PROC_TOP);break;
+            }
+        } 
+        if(statlist.size() == 0){   //if no vlues in the thing, use all/default vals
+            char* tmp[1];
+            tmp[0] = (char*)std::string("-a").c_str();
+            statlist = genlist(1, tmp);
+        }
+        statlist.unique(); //remove duplicates
+
+        return statlist;
     } 
 };
 
