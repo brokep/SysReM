@@ -18,6 +18,13 @@ private:
    std::string m_model_name;
    double m_freq;
    int m_procesors;
+
+    ///proc/stat
+    double m_nice;
+    double m_user;
+    double m_system;
+    double m_iowait;
+    double m_idle;
 };
 
 #endif

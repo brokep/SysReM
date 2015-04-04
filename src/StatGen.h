@@ -13,6 +13,8 @@
 #define DISK_STAT 2 
 #define PROC_TOP 3 
 
+#define MEASURE_RES 200 //ms to measure stats
+
 
 class StatGen{
 public:
