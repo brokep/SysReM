@@ -41,9 +41,9 @@ void Reader::read(){
 
 const std::string getVersion(){
     std::ifstream in("/proc/version");
-    char tmp[150]; 
-    in.getline(tmp, 150);
-    return tmp;
+    std::string st;
+    getline(in, st, '#');
+    return st;
 }
 
 const std::string currentTime(){
