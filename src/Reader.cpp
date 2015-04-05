@@ -2,10 +2,15 @@
 #include <stdio.h>
 #include <time.h>
 #include <iostream>
+#include <fstream>
 #include "Reader.h"
 #include "Stat.h"
 
+const std::string getVersion();
+const std::string currentTime();
+
 Reader::Reader(std::list<Stat*> &stats) : m_stats(stats){
+    std::cout << getVersion() << std::endl;    
 }
 
 Reader::~Reader(){
@@ -19,8 +24,6 @@ void Reader::measure(){
     for(auto it = m_stats.begin();it!=m_stats.end();++it)
         (*it)->measure();    
 }
-
-const std::string currentTime();
 
 void Reader::read(){
     //call read for each in m_stats
@@ -36,6 +39,12 @@ void Reader::read(){
     std::cout<<st<<std::endl;
 }
 
+const std::string getVersion(){
+    std::ifstream in("/proc/version");
+    char tmp[150]; 
+    in.getline(tmp, 150);
+    return tmp;
+}
 
 const std::string currentTime(){
     time_t t= time(0);
