@@ -1,20 +1,28 @@
 
 #include <unistd.h>
 #include "ProcStat.h"
+#include "ProcMan.h"
+#include "StatGen.h"
 
 ProcStat::ProcStat(){
 }
 
 ProcStat::~ProcStat(){
+    //clean up m_top
 }
 
 
 void ProcStat::measure(){
-    //memory specific measurements 
-
+   //find all pid dirs
+    //store list of them then call readBefore on all
+    //wait usleep
+    //call read After on all
+    //sort list
+    //pick the top X, defined in statGen NUM_TOPPROC right now 
+    //store those in m_top
 }
 
 std::string ProcStat::read(){
-
+    //print on all in m_top, add all with title and return 
     return "ProcStat reading\n";
 }

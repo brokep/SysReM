@@ -14,6 +14,7 @@
 #define PROC_TOP 3 
 
 #define MEASURE_RES 200 //ms to measure stats
+#define NUM_TOPPROC 3 //number of top processes to display
 
 
 class StatGen{

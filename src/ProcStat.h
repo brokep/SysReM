@@ -1,9 +1,13 @@
 #ifndef PROCSTAT_H
 #define PROCSTAT_H
 
+#include <list>
 #include <string>
 #include <pthread.h>
 #include "Stat.h"
+
+//foward declaratino
+class ProcMan;
 
 class ProcStat : public Stat{
 public:
@@ -14,6 +18,10 @@ public:
    std::string read(); 
 
 private:
+    //hold the top N processes
+    std::list<ProcMan*> m_top;
+
+
    //the infomation for process is taken from /proc/stat
    //or /proc/statm or /proc/status
 
