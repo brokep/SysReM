@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <time.h>
 #include <iostream>
+#include <fstream>
 #include "Reader.h"
 #include "Stat.h"
 
-Reader::Reader(std::list<Stat*> &stats) : m_stats(stats){
+Reader::Reader(std::list<Stat*> &stats, std::string fileName) 
+        : m_stats(stats), m_fileName(fileName){
 }
 
 Reader::~Reader(){
@@ -27,13 +29,19 @@ void Reader::read(){
     //print out all the stuffs however
 
     //print current time each iteratino through all of the stats
-    std::cout << currentTime() << std::endl;    
+    std::string st(currentTime());
 
-    std::string st;
     for(auto it = m_stats.begin();it!=m_stats.end();++it){
         st += (*it)->read();
-    } 
-    std::cout<<st<<std::endl;
+    }
+    if(m_fileName == "") 
+        std::cout<<st<<std::endl;
+    else{
+        //print to file
+        std::ofstream out(m_fileName, std::ofstream::app);
+        //out.seekp(0, std::ios_base::beg);
+        out << st << "\n";
+    }
 }
 
 
@@ -42,6 +50,6 @@ const std::string currentTime(){
     tm tstruct;
     char b[80];
     tstruct = *localtime(&t);
-    strftime(b, sizeof(b), "%m-%d-%Y %X", &tstruct);
+    strftime(b, sizeof(b), "%m-%d-%Y %X\n", &tstruct);
     return b;
 }

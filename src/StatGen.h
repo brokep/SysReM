@@ -16,6 +16,9 @@
 
 #define MEASURE_RES 200 //ms to measure stats
 
+#define DEFAULT_INTERVAL 1
+#define DEFAULT_COUNT 10
+#define DEFAULT_FILENAME "output"
 
 class StatGen{
 public:
@@ -30,7 +33,6 @@ public:
                 case PROC_TOP:stats.push_back(new ProcStat());break;
 
             }
-
         } 
 
         return stats;
@@ -49,6 +51,20 @@ public:
                     statlist.push_back(MEM_UTIL);
                     statlist.push_back(DISK_STAT);
                     statlist.push_back(PROC_TOP);break;
+                case 'f':
+                    //output to file
+                    //look for file name
+                    if(i+1==count || args[i+1][0] == '-'){
+                        //not present, use default name
+                        FILE_NAME = DEFAULT_FILENAME; 
+                    }
+                    //file name present, grab it and store
+                    else{
+                        FILE_NAME = args[i+1]; 
+                        //this arg is now used, so skip it next iteration
+                        ++i;
+                    }
+                    break;
             }
         } 
         if(statlist.size() == 0){   //if no vlues in the thing, use all/default vals
@@ -56,10 +72,12 @@ public:
             tmp[0] = (char*)std::string("-a").c_str();
             statlist = genlist(1, tmp);
         }
+        statlist.sort(); //put all vals in default order
         statlist.unique(); //remove duplicates
 
         return statlist;
     } 
+    static std::string FILE_NAME;
 };
 
 #endif

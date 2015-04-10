@@ -4,8 +4,8 @@
 #include "Reader.h"
 #include "Timer.h"
 
-#define DEFAULT_INTERVAL 1
-#define DEFAULT_COUNT 10
+//default file name is output
+std::string StatGen::FILE_NAME = "";
 
 int main(int argc, char** argv){
     
@@ -21,7 +21,7 @@ int main(int argc, char** argv){
     
     std::list<Stat*> stats(StatGen::generate(statlist)); 
 
-    Reader r(stats);
+    Reader r(stats, StatGen::FILE_NAME);
     Timer t(r, intv, count);
 
     t.start();
