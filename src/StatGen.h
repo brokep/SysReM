@@ -15,6 +15,7 @@
 #define PROC_TOP 3 
 
 #define MEASURE_RES 200 //ms to measure stats
+#define NUM_TOPPROC 3 //number of top processes to display
 
 #define DEFAULT_INTERVAL 1
 #define DEFAULT_COUNT 10

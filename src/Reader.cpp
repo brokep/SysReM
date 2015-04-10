@@ -6,8 +6,20 @@
 #include "Reader.h"
 #include "Stat.h"
 
+const std::string getVersion();
+const std::string currentTime();
+
 Reader::Reader(std::list<Stat*> &stats, std::string fileName) 
         : m_stats(stats), m_fileName(fileName){
+
+    if(m_fileName == "") 
+        std::cout<<getVersion()<<std::endl;
+    else{
+        //print to file
+        std::ofstream out(m_fileName, std::ofstream::app);
+        //out.seekp(0, std::ios_base::beg);
+        out << getVersion() << "\n";
+    }
 }
 
 Reader::~Reader(){
@@ -21,8 +33,6 @@ void Reader::measure(){
     for(auto it = m_stats.begin();it!=m_stats.end();++it)
         (*it)->measure();    
 }
-
-const std::string currentTime();
 
 void Reader::read(){
     //call read for each in m_stats
@@ -44,6 +54,12 @@ void Reader::read(){
     }
 }
 
+const std::string getVersion(){
+    std::ifstream in("/proc/version");
+    std::string st;
+    getline(in, st, '#');
+    return st;
+}
 
 const std::string currentTime(){
     time_t t= time(0);
