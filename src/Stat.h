@@ -15,6 +15,9 @@ public:
     virtual void measure() = 0;
     virtual std::string read() = 0;
 
+    static void threadEntry(Stat* handle){
+       handle->measure(); 
+    }
 
 };
 

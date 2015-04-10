@@ -3,6 +3,7 @@
 #include <time.h>
 #include <iostream>
 #include <fstream>
+#include <thread>
 #include "Reader.h"
 #include "Stat.h"
 
@@ -30,8 +31,17 @@ Reader::~Reader(){
 
 void Reader::measure(){
     //call measure for each in m_stats
-    for(auto it = m_stats.begin();it!=m_stats.end();++it)
-        (*it)->measure();    
+    //call threadentry func, so all wait periods can sync
+    std::list<std::thread*> threads;
+
+    for(auto it = m_stats.begin();it!=m_stats.end();++it){
+        threads.push_back(new std::thread(Stat::threadEntry, *it));
+    }
+ 
+    //wait for threads to finish
+    for(auto it = threads.begin();it!=threads.end();++it){
+        (*it)->join();
+    }    
 }
 
 void Reader::read(){
