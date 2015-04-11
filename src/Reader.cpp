@@ -52,7 +52,7 @@ void Reader::read(){
     std::string st(currentTime());
 
     for(auto it = m_stats.begin();it!=m_stats.end();++it){
-        st += (*it)->read();
+        st += (*it)->read()+"\n";
     }
     if(m_fileName == "") 
         std::cout<<st<<std::endl;
