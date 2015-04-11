@@ -14,7 +14,7 @@
 #define DISK_STAT 2 
 #define PROC_TOP 3 
 
-#define MEASURE_RES 200 //ms to measure stats
+#define MEASURE_RES 400 //ms to measure stats
 #define NUM_TOPPROC 3 //number of top processes to display
 
 #define DEFAULT_INTERVAL 1

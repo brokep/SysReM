@@ -3,8 +3,6 @@
 #include <unistd.h>
 #include "CPUStat.h"
 #include "StatGen.h"
-//#include <stdio.h>///////////////////DEBUG 
-//#include <string>////////DEBUG
 
 
 
@@ -45,9 +43,6 @@ void CPUStat::measure(){
     in>>a[4];//iowait
     in>>a[5];
     in>>a[6];
-
-    //printf("user -> %d nice -> %d system -> %d idle -> %d\n", b[0], b[1], b[2], b[3]); 
-    //printf("user -> %d nice -> %d system -> %d idle -> %d\n", a[0], a[1], a[2], a[3]); 
        
     totalTicks = std::accumulate(a, a+7, 0) - std::accumulate(b, b+7, 0);
 
@@ -56,9 +51,6 @@ void CPUStat::measure(){
     m_system = 100.0*(a[2] - b[2])/totalTicks;
     m_idle = 100.0*(a[3] - b[3])/totalTicks;
     m_iowait = 100.0*(a[4] - b[4])/totalTicks;
-
-    //printf("user -> %f nice -> %f system -> %f idle -> %f\n", m_user, m_nice, m_system, m_idle); 
-
 
 }
 
