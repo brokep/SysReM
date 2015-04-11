@@ -15,17 +15,13 @@ void DevMan::readBefore(){
     std::ifstream in("/proc/diskstats");
     in.seekg(m_pos);
    
-    bool flag(m_devName.length()!=3);//if length of name greater than 3, its a partition
     char devnull[100];//for trash 
     in >> reads[0];
-    if(flag)
-        in >> devnull;
+    in >> devnull;
     in >> sectors_read[0];
-    if(flag)
-        in >> devnull;
+    in >> devnull;
     in >> writes[0];
-    if(flag)
-        in >> devnull;
+    in >> devnull;
     in >> sectors_writ[0];
 }
 
@@ -33,17 +29,13 @@ void DevMan::readAfter(){
     std::ifstream in("/proc/diskstats");
     in.seekg(m_pos);
    
-    bool flag(m_devName.length()!=3);//if length of name greater than 3, its a partition
     char devnull[100];//for trash 
     in >> reads[1];
-    if(flag)
-        in >> devnull;
+    in >> devnull;
     in >> sectors_read[1];
-    if(flag)
-        in >> devnull;
+    in >> devnull;
     in >> writes[1];
-    if(flag)
-        in >> devnull;
+    in >> devnull;
     in >> sectors_writ[1];
 }
 
