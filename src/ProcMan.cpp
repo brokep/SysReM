@@ -6,6 +6,10 @@ ProcMan::ProcMan(char* pidDir) : m_pidDir(pidDir), m_bticks(0), m_ticks(0){
 void ProcMan::readBefore(){
     //read values 14 and 15 in m_pidDir/stat
     //sum them and store into m_bticks
+  using std::ifstream;
+  std::string name = std::tostring
+  ifstream in(pidDir);
+
 }
 
 void ProcMan::readAfter(){
