@@ -20,6 +20,21 @@ void ProcStat::measure(){
     //sort list
     //pick the top X, defined in statGen NUM_TOPPROC right now 
     //store those in m_top
+  DIR *dirp = NULL;
+  struct dirent *dp = NULL;
+  if ((dirp = opendir("/proc/")) == NULL) {
+    std::cout << "opendir failed" << std::endl;
+  }
+  while ((dirp = readdir_r(dirp)) != NULL) {
+    char *dname;
+    strncpy(dname, dirp->d_name, char_traits::length(dirp->d_name));
+    if (isdigit(fname[0])) {
+      
+    }
+  }
+
+
+
 }
 
 std::string ProcStat::read(){

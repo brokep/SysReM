@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include <pthread.h>
+#include <dirent.h>
 #include "Stat.h"
 
 //foward declaratino
