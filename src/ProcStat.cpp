@@ -36,19 +36,25 @@ void ProcStat::measure(){
   DIR *dirp = NULL;
   struct dirent *dp = NULL;
 
-  //
+  //open
   if ((dirp = opendir("/proc/")) == NULL) {
     std::cout << "opendir failed" << std::endl;
   }
   while ((dp = readdir(dirp)) != NULL) {
     char dname[128];
     strncpy(dname, (const char *)(dp->d_name), strlen(dp->d_name));
+    dname[strlen(dp->d_name)] = '\0';
     if (isdigit(dname[0])) {
-      char dirname[128]= "/proc/";
-      strncpy(dirname, (const char *)dname, strlen(dname));
-      m_procs.push_back(new ProcMan(dirname));
+      char dirname[32]= "/proc/";
+      strncpy(dirname + 6, (const char *)dname, strlen(dname));
+      dirname[6 + strlen(dname)] = '\0';
+      std::string dir_str(dirname, dirname + 32);
+      //      std::cout << dir_str << std::endl;
+      m_procs.push_back(new ProcMan(dir_str.c_str()));
     }
   }
+
+  closedir(dirp);
 
   for (auto it = m_procs.begin(); it != m_procs.end(); ++it) {
     (*it)->readBefore();
