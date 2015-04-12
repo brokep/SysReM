@@ -50,7 +50,7 @@ void ProcStat::measure(){
       dirname[6 + strlen(dname)] = '\0';
       std::string dir_str(dirname, dirname + 32);
       //      std::cout << dir_str << std::endl;
-      m_procs.push_back(new ProcMan(dir_str.c_str()));
+      m_procs.push_back(new ProcMan(dir_str));
     }
   }
 
