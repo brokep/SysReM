@@ -9,7 +9,7 @@
 class ProcMan{
 public:
     //creat ProcMan with path to process /proc/[pid]
-    ProcMan(const char* pidDir);
+    ProcMan(std::string pidDir);
 
     //read values before the wait
     void readBefore();
@@ -24,7 +24,7 @@ public:
 
 
 private:
-    const char* m_pidDir;
+    std::string m_pidDir;
     int m_bticks;
     int m_ticks;
 };
