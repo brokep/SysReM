@@ -1,7 +1,11 @@
 #ifndef DISKSTAT_H
 #define DISKSTAT_H
 
+#include <list>
 #include "Stat.h"
+
+//foward declaration
+class DevMan;
 
 class DiskStat : public Stat{
 public:
@@ -12,7 +16,7 @@ public:
    std::string read(); 
 
 private:
-    //relevant fields
+    std::list<DevMan*> m_devs;
 
 };
 
