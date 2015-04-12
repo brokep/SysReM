@@ -11,7 +11,8 @@ ProcMan::ProcMan(std::string pidDir) : m_pidDir(pidDir), m_bticks(0), m_ticks(0)
 
 void ProcMan::readBefore(){
     //read values 14 and 15 in m_pidDir/stat
-    std::ifstream in(m_pidDir+"/stat");
+  std::string fname = m_pidDir + "/stat";
+  std::ifstream in(fname.c_str());
     
     char b[100];
     for(int i=1; i<14; ++i){
