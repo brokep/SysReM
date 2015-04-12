@@ -16,12 +16,11 @@ public:
     ~ProcStat();
 
    void measure();
-   std::string read(); 
+   std::string read();
 
 private:
     //hold the top N processes
     std::list<ProcMan*> m_top;
-
 
    //the infomation for process is taken from /proc/stat
    //or /proc/statm or /proc/status
