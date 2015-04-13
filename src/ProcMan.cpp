@@ -6,20 +6,20 @@
 #include "StatGen.h"
 
 
-ProcMan::ProcMan(std::string pidDir) : m_pidDir(pidDir), m_bticks(0), m_ticks(0){
+ProcMan::ProcMan(int pidDir) : m_pidDir(pidDir), m_bticks(0), m_ticks(0){
 }
 
 void ProcMan::readBefore(){
     //read values 14 and 15 in m_pidDir/stat
-  std::string fname = m_pidDir + "/stat";
-  std::ifstream in(fname.c_str());
-    
-    char b[100];
+    char fn[50];
+    sprintf(fn,"%s%d%s", "/proc/", m_pidDir, "/stat");
+    std::ifstream in(fn);
+
     for(int i=1; i<14; ++i){
-       in>>b; 
+        in.ignore(100, ' ');
     } 
     //sum them and store into m_bticks
-    int utime, stime;
+    int utime(0), stime(0);
     in>>utime;
     in>>stime;
     m_bticks = utime + stime;
@@ -27,11 +27,12 @@ void ProcMan::readBefore(){
 
 void ProcMan::readAfter(){
     //read again vals 14, 15 and sum
-    std::ifstream in(m_pidDir+"/stat");
-    
-    char b[100];
+    char fn[50];
+    sprintf(fn,"%s%d%s", "/proc/", m_pidDir, "/stat");
+    std::ifstream in(fn);   
+
     for(int i=1; i<14; ++i){
-       in>>b; 
+        in.ignore(100, ' ');
     } 
 
     //calc subtract m_bticks and store result in m_ticks
@@ -53,9 +54,11 @@ std::string ProcMan::print(){
     double cpu(0);
     double mem(0);
 
-    std::ifstream in(m_pidDir+"/status");
-    char b[50];
+    char fn[50];
+    sprintf(fn,"%s%d%s", "/proc/", m_pidDir, "/status");
+    std::ifstream in(fn);   
 
+    char b[50];
     do{
         in>>b;
         if(strcmp(b,"Name:") == 0){
@@ -100,12 +103,12 @@ std::string ProcMan::print(){
         }
     } while(in.peek() != EOF);
  
-    cpu = (1.0*m_ticks/(cores * sysconf(_SC_CLK_TCK))) / (MEASURE_RES/1000.0);
-    
+    //cpu = (1.0*m_ticks/(cores * sysconf(_SC_CLK_TCK))) / (MEASURE_RES/1000.0);
+    cpu = m_ticks; //TODO
 
     //format string and return one line of process info
     char ret[200];
-    sprintf(ret, "%15s%5d%-10s%6.2f%6.2f\n","",pid,command,cpu,mem);
+    sprintf(ret, "%15s%5d%15s%6.2f%6.2f\n","",pid,command,cpu,mem);
     return ret;
 }
 

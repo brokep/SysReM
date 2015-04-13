@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cstdlib>
 
 ProcStat::ProcStat(){
 }
@@ -29,6 +30,11 @@ void ProcStat::measure(){
     //pick the top X, defined in statGen NUM_TOPPROC right now 
     //store those in m_top
 
+    //clean up previous top procs
+    std::for_each(m_top.begin(), m_top.end(), std::default_delete<ProcMan>());
+    m_top.clear();
+
+
   //hold all the current processes
   std::list<ProcMan*> m_procs;
 
@@ -49,11 +55,10 @@ void ProcStat::measure(){
       strncpy(dirname + 6, (const char *)dname, strlen(dname));
       dirname[6 + strlen(dname)] = '\0';
       std::string dir_str(dirname, dirname + 32);
-      //      std::cout << dir_str << std::endl;
-      m_procs.push_back(new ProcMan(dir_str));
+            //std::cout << dir_str << std::endl;
+      m_procs.push_back(new ProcMan(strtol(dname,nullptr,10)));
     }
   }
-
   closedir(dirp);
 
   for (auto it = m_procs.begin(); it != m_procs.end(); ++it) {
@@ -69,15 +74,15 @@ void ProcStat::measure(){
   m_procs.sort(proc_comp);
 
   for (int i = 0; i < NUM_TOPPROC; ++i) {
-    m_top.push_back(m_procs.front());
-    m_procs.pop_front();
+    m_top.push_back(m_procs.back());
+    m_procs.pop_back();
   }
 }
 
 std::string ProcStat::read(){
     //print on all in m_top, add all with title and return
   char b[200];
-  sprintf(b, "%-15s%5s%10s%6s%6s\n", "Top processes", "pid", "Command",
+  sprintf(b, "%-15s%5s%15s%6s%6s\n", "Top processes", "pid", "Command",
 	  "%cpu", "%mem");
   std::string ret(b);
   for (auto it = m_top.begin(); it != m_top.end(); ++it) {
