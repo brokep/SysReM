@@ -7,7 +7,7 @@
 #include <dirent.h>
 #include "Stat.h"
 
-//foward declaratino
+//foward declaration
 class ProcMan;
 
 class ProcStat : public Stat{
@@ -18,8 +18,10 @@ public:
    void measure();
    std::string read();
 
+   void clean();
+
 private:
-    //hold the top N processes
+    //hold the top N processes pointers
     std::list<ProcMan*> m_top;
 
    //the infomation for process is taken from /proc/stat
