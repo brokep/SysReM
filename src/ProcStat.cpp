@@ -88,7 +88,7 @@ void ProcStat::measure(){
 std::string ProcStat::read(){
     //print on all in m_top, add all with title and return
   char b[200];
-  sprintf(b, "%-15s%5s%20s%6s%6s\n", "Top processes", "pid", "Command",
+  sprintf(b, "%-15s%5s%18s%6s%6s\n", "Top processes", "pid", "Command",
 	  "%cpu", "%mem");
   std::string ret(b);
   for (auto it = m_top.begin(); it != m_top.end(); ++it) {

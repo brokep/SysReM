@@ -108,7 +108,7 @@ std::string ProcMan::print(){
 
     //format string and return one line of process info
     char ret[200];
-    sprintf(ret, "%15s%5d%15s%6.2f%6.2f\n","",pid,command,cpu,mem);
+    sprintf(ret, "%15s%5d%18s%6.2f%6.2f\n","",pid,command,cpu,mem);
     return ret;
 }
 
