@@ -43,7 +43,7 @@ void ProcStat::measure(){
   //pointer to the content of the directory
   struct dirent *dp = NULL;
 
-  //open
+  //open the directory "/proc/"
   if ((dirp = opendir("/proc/")) == NULL) {
     std::cout << "opendir failed" << std::endl;
     return;

@@ -10,7 +10,7 @@
 //foward declaration
 class ProcMan;
 
-class ProcStat : public Stat{
+class ProcStat : public Stat {
 public:
     ProcStat();
     ~ProcStat();
