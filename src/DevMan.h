@@ -1,5 +1,5 @@
 #ifndef DEVMAN_H
-#define DEVMEN_H
+#define DEVMAN_H
 
 #include <string>
 
