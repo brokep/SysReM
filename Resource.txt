@@ -1,4 +1,6 @@
 - proc cat meminfo
 - proc
 - nanosleep
-- 
+- calculating cpu utilization of processes: 
+	http://stackoverflow.com/questions/1420426/calculating-cpu-usage-of-a-process-in-linux
+
