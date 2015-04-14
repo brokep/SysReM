@@ -27,6 +27,7 @@ private:
     int m_pidDir;
     int m_bticks;
     int m_ticks;
+    int cpu_ticks;
 };
 
 #endif
