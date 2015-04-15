@@ -5,6 +5,7 @@
 #include "ProcMan.h"
 #include "StatGen.h"
 
+const int CPU_PARA = 4;
 
 ProcMan::ProcMan(int pidDir) : m_pidDir(pidDir), m_bticks(0), m_ticks(0), 
                                cpu_ticks(0) {
@@ -27,9 +28,9 @@ void ProcMan::readBefore(){
 
     std::ifstream cpuin("/proc/stat");
     char ch[5];
-    int cpu_para[9];
+    int cpu_para[CPU_PARA];
     cpuin >> ch;
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < CPU_PARA; ++i) {
       cpuin >> cpu_para[i];
       cpu_ticks += cpu_para[i];
     }
@@ -54,9 +55,9 @@ void ProcMan::readAfter(){
 
     std::ifstream cpuin("/proc/stat");
     char ch[5];
-    int cpu_para[9];
+    int cpu_para[CPU_PARA];
     cpuin >> ch;
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < CPU_PARA; ++i) {
       cpuin >> cpu_para[i];
       cpu_ticks -= cpu_para[i];
     }
@@ -114,17 +115,14 @@ std::string ProcMan::print(){
 
     do{
         in3>>b;
-        if(strcmp(b,"cpu") == 0){
-            in3>>b;
-            if(strcmp(b,"cores") == 0){
-                in3>>b;
-                in3>>cores;
-                break;
-            }
+        if (strcmp(b, "cores") == 0) {
+          in3 >> b;
+          in3 >> cores;
+          break;
         }
-    } while(in.peek() != EOF);
+    } while(in3.peek() != EOF);
  
-    cpu = (100.0 * m_ticks) / cpu_ticks;
+    cpu = (100.0 * m_ticks * cores) / cpu_ticks;
 
     //format string and return one line of process info
     char ret[200];
