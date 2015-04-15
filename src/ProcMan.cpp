@@ -88,7 +88,7 @@ std::string ProcMan::print(){
         else if(strcmp(b,"Pid:") == 0){
             in>>pid;
         }
-        else if(strcmp(b,"VmRSS") == 0){
+        else if(strcmp(b,"VmRSS:") == 0){
             in>>mem;
         }
 
