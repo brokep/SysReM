@@ -3,6 +3,8 @@
 
 #include <list>
 #include <string>
+#include <stdlib.h>
+#include <iostream>
 #include "Stat.h"
 #include "CPUStat.h"
 #include "MemStat.h"
@@ -66,6 +68,19 @@ public:
                         ++i;
                     }
                     break;
+                case 'n':
+                    if(i+1==count || args[i+1][0] == '-'){
+                        //no count presesnt
+                        std::cout<<"arg -n must be followed by a number\n";
+                        exit(-1);
+                    }
+                    //file name present, grab it and store
+                    else{
+                        TOP_PROCS = atoi(args[i+1]); 
+                        //this arg is now used, so skip it next iteration
+                        ++i;
+                    }
+                    break;
             }
         } 
         if(statlist.size() == 0){   //if no vlues in the thing, use all/default vals
@@ -79,6 +94,7 @@ public:
         return statlist;
     } 
     static std::string FILE_NAME;
+    static int TOP_PROCS;
 };
 
 #endif

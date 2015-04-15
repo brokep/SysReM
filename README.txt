@@ -44,23 +44,26 @@ Below is the implementation SysReM's functionality:
 4. Usage instruction:
 	a. run "cmake ." and then "make" to compile the program
 	b. run "./sysrem" with you chosen options:
-        sysrem t n [-a] [-c] [-m] [-d] [-p] [-f [filename]]
+        SYNOPSIS
+        sysrem t n [-a] [-c] [-m] [-d] [-p] [-n num] [-f [filename]]
     
         DESCRIPTION 
-            Running sysrem without any arguments is eqiuvalent to running sysrem 1 10 -a.
+            Running sysrem without any arguments is eqiuvalent to running sysrem 1 10 -a -n 4.
             If arguemtns are specified, t and n must be specified fisrt. t is the interval 
             between measurements and n is the number of times meaurements are reported. 
 
         OPTIONS
-            -a      reports all available measurements, equivalent to -c -d -m -p 
+            -a          reports all available measurements, equivalent to -c -d -m -p 
 
-            -c      reports CPU utilization statistics
+            -c          reports CPU utilization statistics
 
-            -m      reports memory utilization statistics
+            -m          reports memory utilization statistics
     
-            -d      reports disk utilization statistics
+            -d          reports disk utilization statistics
         
-            -p      reports the top active process
+            -p          reports the top active process
+
+            -n num      sets the number of top processes to be reported. 
 
             -f [filename]   sends the output of the program to filename(appends to the end if filename exists)
                             If filename not specified, default name "output" is used.

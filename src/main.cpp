@@ -6,6 +6,7 @@
 
 //default file name is output
 std::string StatGen::FILE_NAME = "";
+int StatGen::TOP_PROCS = 4;
 
 int main(int argc, char** argv){
     

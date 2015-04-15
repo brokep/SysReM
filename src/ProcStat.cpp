@@ -79,7 +79,7 @@ void ProcStat::measure(){
   m_procs.sort(proc_comp);
 
   //enter the NUM_TOPPROC most active processes' pointers to m_procs
-  for (int i = 0; i < NUM_TOPPROC; ++i) {
+  for (int i = 0; i < StatGen::TOP_PROCS; ++i) {
     m_top.push_back(m_procs.back());
     m_procs.pop_back();
   }
