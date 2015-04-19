@@ -9,6 +9,8 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
 
 ProcStat::ProcStat(){
 }
@@ -69,7 +71,8 @@ void ProcStat::measure(){
     (*it)->readBefore();
   }
 
-  usleep(1000*MEASURE_RES);
+  // usleep(1000*MEASURE_RES);
+  std::this_thread::sleep_for(std::chrono::seconds(3));
 
   for (auto it = m_procs.begin(); it != m_procs.end(); ++it) {
     (*it)->readAfter();
