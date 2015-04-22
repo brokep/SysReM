@@ -34,7 +34,6 @@ public:
                 case MEM_UTIL:stats.push_back(new MemStat());break;
                 case DISK_STAT:stats.push_back(new DiskStat());break;
                 case PROC_TOP:stats.push_back(new ProcStat());break;
-
             }
         } 
 

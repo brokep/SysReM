@@ -1,6 +1,9 @@
 #include <fstream>
 #include <numeric>
 #include <unistd.h>
+#include <thread>
+#include <chrono>
+#include <stdexcept>
 #include "CPUStat.h"
 #include "StatGen.h"
 
@@ -17,6 +20,10 @@ void CPUStat::measure(){
     //cpu specific measurements 
     using std::ifstream;
     ifstream in("/proc/stat");
+    if (in.fail()) {
+      throw std::invalid_argument("Error opening /proc/stat");
+      exit(1);
+    }
     char ch[3];
     in>>ch;
     int b[7]; //before
@@ -32,7 +39,7 @@ void CPUStat::measure(){
     in>>b[5];
     in>>b[6];
 
-    usleep(1000*MEASURE_RES);
+    std::this_thread::sleep_for(std::chrono::milliseconds(MEASURE_RES));
 
     in.seekg(0);
     in>>ch;
@@ -43,6 +50,8 @@ void CPUStat::measure(){
     in>>a[4];//iowait
     in>>a[5];
     in>>a[6];
+
+    in.close();
        
     totalTicks = std::accumulate(a, a+7, 0) - std::accumulate(b, b+7, 0);
 

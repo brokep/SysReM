@@ -72,11 +72,12 @@ Below is the implementation SysReM's functionality:
         sysrem t n [-a] [-c] [-m] [-d] [-p] [-n num] [-f [filename]]
     
         DESCRIPTION 
-            Running sysrem without any arguments is eqiuvalent to running sysrem 1 10 -a -n 4.
-            If arguemtns are specified, t and n must be specified fisrt. t is the interval 
-            between measurements and n is the number of times meaurements are reported. 
+            Running sysrem without any arguments is equivalent to running sysrem 1 10 -a -n 4.
+            If arguments are specified, t and n must be specified fisrt. 
 
         OPTIONS
+			 t 			interval between measurements (mandatory)
+			 n			number of times measurements are reported 
             -a          reports all available measurements, equivalent to -c -d -m -p 
 
             -c          reports CPU utilization statistics

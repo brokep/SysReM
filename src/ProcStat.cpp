@@ -26,10 +26,9 @@ bool proc_comp(ProcMan *ptr1, ProcMan *ptr2);
 void ProcStat::measure(){
    //find all pid dirs
     //store list of them then call readBefore on all
-    //wait usleep
-    //call read After on all
-    //sort list
-    //pick the top X, defined in statGen NUM_TOPPROC right now 
+    //wait MEASURE_RES milliseconds
+    //call readAfter on all
+    //sort list  
     //store those in m_top
 
     //clean up previous top procs
@@ -47,7 +46,7 @@ void ProcStat::measure(){
 
   //open the directory "/proc/"
   if ((dirp = opendir("/proc/")) == NULL) {
-    std::cout << "opendir failed" << std::endl;
+    perror("opendir failed");
     return;
   }
   while ((dp = readdir(dirp)) != NULL) {
@@ -73,8 +72,7 @@ void ProcStat::measure(){
     (*it)->readBefore();
   }
 
-  // usleep(1000*MEASURE_RES);
-  std::this_thread::sleep_for(std::chrono::seconds(3));
+  std::this_thread::sleep_for(std::chrono::milliseconds(MEASURE_RES));
 
   for (auto it = m_procs.begin(); it != m_procs.end(); ++it) {
     (*it)->readAfter();

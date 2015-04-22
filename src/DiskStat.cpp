@@ -5,6 +5,9 @@
 #include <cstdio>
 #include <algorithm>
 #include <memory>
+#include <thread>
+#include <chrono>
+#include <stdexcept>
 #include "DiskStat.h"
 #include "DevMan.h"
 #include "StatGen.h"
@@ -24,7 +27,11 @@ void DiskStat::measure(){
     std::for_each(m_devs.begin(), m_devs.end(), std::default_delete<DevMan>());
     m_devs.clear();    
 
-    std::ifstream in("/proc/diskstats"); 
+    std::ifstream in("/proc/diskstats");
+    if (in.fail()) {
+      throw std::invalid_argument("Error opening /proc/diskstats");
+      exit(1);
+    } 
     char b[50];
     in>>b;
     //find all devices, so those that start with sd
@@ -43,7 +50,7 @@ void DiskStat::measure(){
         (*it)->readBefore();
 
     //wait the appropriate amount
-    usleep(1000*MEASURE_RES); 
+    std::this_thread::sleep_for(std::chrono::milliseconds(MEASURE_RES));
 
     //read again after
     for(auto it=m_devs.begin();it!=m_devs.end();++it)
