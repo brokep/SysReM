@@ -8,7 +8,7 @@
 
 //number of parameters in "cpu/cpuinfo" that we are going
 //add to our total cpu ticks
-const int CPU_PARA = 4;
+const int CPU_PARA = 7;
 
 ProcMan::ProcMan(int pidDir) : m_pidDir(pidDir), m_bticks(0), m_ticks(0), 
                                cpu_ticks(0) {
