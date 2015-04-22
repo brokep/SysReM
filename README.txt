@@ -67,7 +67,7 @@ Below is the implementation SysReM's functionality:
 
 4. Usage instruction:
 	a. run "cmake ." and then "make" to compile the program
-	b. run "./sysrem" with you chosen options:
+	b. run "./sysrem" with your chosen options:
         SYNOPSIS
         sysrem t n [-a] [-c] [-m] [-d] [-p] [-n num] [-f [filename]]
     
