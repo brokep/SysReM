@@ -6,6 +6,7 @@
 
 //default file name is output
 std::string StatGen::FILE_NAME = "";
+//default number of top processes is 4
 int StatGen::TOP_PROCS = 4;
 
 int main(int argc, char** argv){

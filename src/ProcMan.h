@@ -4,7 +4,7 @@
 #include <string>
 
 /**
- * Manager of the processes
+ * Manager of each individual  process
  */
 class ProcMan{
 public:

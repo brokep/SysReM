@@ -54,7 +54,9 @@ void ProcStat::measure(){
     char dname[128];
     strncpy(dname, (const char *)(dp->d_name), strlen(dp->d_name));
     dname[strlen(dp->d_name)] = '\0';
-    //file representing processes are named 
+    //files representing different processes are named by number.
+    //Therefore, we visit those files that has the first digit of
+    //their names starting with a digit.
     if (isdigit(dname[0])) {
       char dirname[32]= "/proc/";
       strncpy(dirname + 6, (const char *)dname, strlen(dname));
@@ -81,7 +83,7 @@ void ProcStat::measure(){
   //sort the list of all current processes in ascending order
   m_procs.sort(proc_comp);
 
-  //enter the NUM_TOPPROC most active processes' pointers to m_procs
+  //enter the TOP_PROCS most active processes' pointers to m_procs
   for (int i = 0; i < StatGen::TOP_PROCS; ++i) {
     m_top.push_back(m_procs.back());
     m_procs.pop_back();
