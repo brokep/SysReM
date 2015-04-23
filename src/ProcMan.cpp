@@ -91,6 +91,7 @@ void ProcMan::readAfter(){
     cpuin.close();
 }
 
+//Processes will be compared based on their m_ticks
 bool ProcMan::operator<(ProcMan& rhs){
     return m_ticks < rhs.m_ticks; 
 }

@@ -79,6 +79,8 @@ void ProcStat::measure(){
   }
 
   //sort the list of all current processes in ascending order
+  //this utilize the proc_comp method we also defines in this
+  //program in order to compare the two ProcMan pointers
   m_procs.sort(proc_comp);
 
   //enter the TOP_PROCS most active processes' pointers to m_procs
