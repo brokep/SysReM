@@ -48,4 +48,9 @@ Milestones/ExpectedShcedule/TimeLine:
 Question:
 	How should the data be displayed? How to go about that etc..
 
-Notes: 
+Division of Labor:
+    Jamison - Framework design and implementation of Reader Timer StatGen Stat CPUStat MemStat DevStat DevMan 
+    Hoang   - Implementation of ProcStat and ProcMan, and various other imoplemtation tweaks in various stats.
+
+
+
