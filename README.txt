@@ -26,7 +26,7 @@ Below is the implementation SysReM's functionality:
 		output display.
 
 	b. CPU information:
-        - CPU utuilization information is found in /proc/stats
+        - CPU utuilization information is found in /proc/stat
         - Values from this file are recorded at two points in time and then compared 
         to determine how much of the CPU is being used to do certain things.
 
