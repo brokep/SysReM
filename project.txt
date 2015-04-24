@@ -45,12 +45,10 @@ Milestones/ExpectedShcedule/TimeLine:
 	April 12-13 - Have all utilization and statistics calculations working and displaying. 
 	April 21 – final report and presentation
 
-Question:
-	How should the data be displayed? How to go about that etc..
-
 Division of Labor:
     Jamison - Framework design and implementation of Reader Timer StatGen Stat CPUStat MemStat DevStat DevMan 
-    Hoang   - Implementation of ProcStat and ProcMan, and various other imoplemtation tweaks in various stats.
+    Hoang   - Implementation of ProcStat and ProcMan, and various other implemtation tweaks, usage of standard
+			library functions, and ensuring error-checking in various stats,
 
 
 
